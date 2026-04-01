@@ -379,7 +379,7 @@ let templateClicks = getStore('tplClicks', {}); // { "tpl_id": count }
 // ═══════════════════════════════════════════════
 //  UTILS
 // ═══════════════════════════════════════════════
-const esc = s => s.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+const esc = s => s.replace(/'/g,"\'").replace(/"/g,'&quot;');
 const $ = id => document.getElementById(id);
 let toastTimer;
 function toast(msg) { $('toast').textContent=msg; $('toast').classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2200); }
@@ -804,11 +804,18 @@ function exportData() {
   if(selected.length===0 && Object.keys(clicks).length===0) { toast('⚠ 没有可导出的数据'); return; }
   const parts = [];
   if(selected.length>0) {
-    parts.push('【当前提示词组合】\n' + selected.map(s=>s.en).join(', '));
-    parts.push('\n【词条对照】\n' + selected.map(s=>`${s.en} (${s.zh})`).join('\n'));
+    parts.push('【当前提示词组合】
+' + selected.map(s=>s.en).join(', '));
+    parts.push('
+【词条对照】
+' + selected.map(s=>`${s.en} (${s.zh})`).join('
+'));
   }
-  parts.push(`\n【使用统计】\n总点击次数: ${Object.values(clicks).reduce((a,b)=>a+b,0)}`);
-  const blob = new Blob([parts.join('\n')],{type:'text/plain;charset=utf-8'});
+  parts.push(`
+【使用统计】
+总点击次数: ${Object.values(clicks).reduce((a,b)=>a+b,0)}`);
+  const blob = new Blob([parts.join('
+')],{type:'text/plain;charset=utf-8'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `nanobanana-export-${Date.now()}.txt`;
