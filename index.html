@@ -6,7 +6,6 @@
 <title>🍌 NanoBanana · AI 提示词词库 Pro</title>
 <style>
 :root{--bg:#0e0f13;--surface:#16181f;--surface2:#1e2028;--surface3:#262933;--border:#2a2d38;--accent:#f5c542;--accent2:#ff7f50;--accent3:#7c6ef7;--text:#e8eaf0;--text2:#9399a6;--text3:#5c6270;--green:#4ade80;--pink:#f472b6;--cyan:#22d3ee;--radius:10px;--fire:#ff6b35;--hot:#ef4444}
-:root.light{--bg:#f5f6fa;--surface:#ffffff;--surface2:#f0f1f5;--surface3:#e8e9f0;--border:#dde0e8;--text:#1a1a2e;--text2:#5c6270;--text3:#9399a6}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;min-height:100vh}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
@@ -150,7 +149,6 @@ body{background:var(--bg);color:var(--text);font-family:'PingFang SC','Microsoft
     <div><div class="logo-text">NanoBanana Pro</div><div class="logo-sub">AI 提示词词库 · Prompt Library</div></div>
   </div>
   <div style="display:flex;align-items:center;gap:14px">
-    <button class="btn btn-secondary" id="themeBtn" onclick="toggleTheme()" title="切换主题">🌙</button>
     <div class="mode-tabs">
       <button class="mode-tab active" onclick="switchMode('dict')">📚 词条库</button>
       <button class="mode-tab" onclick="switchMode('tpl')">🎨 提示词模板</button>
@@ -817,29 +815,6 @@ function exportData() {
   a.click();
   toast('✅ 已导出');
 }
-
-// ═══════════════════════════════════════════════
-//  THEME TOGGLE
-// ═══════════════════════════════════════════════
-function toggleTheme() {
-  const isDark = !document.documentElement.classList.contains('light');
-  if(isDark) {
-    document.documentElement.classList.add('light');
-    $('themeBtn').textContent = '☀️';
-    setStore('theme', 'light');
-  } else {
-    document.documentElement.classList.remove('light');
-    $('themeBtn').textContent = '🌙';
-    setStore('theme', 'dark');
-  }
-}
-(function initTheme() {
-  const saved = getStore('theme', 'dark');
-  if(saved === 'light') {
-    document.documentElement.classList.add('light');
-    $('themeBtn').textContent = '☀️';
-  }
-})();
 
 // ═══════════════════════════════════════════════
 //  INIT
